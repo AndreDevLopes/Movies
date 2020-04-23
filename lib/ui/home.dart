@@ -41,10 +41,36 @@ class MoviListVie extends StatelessWidget {
               trailing: Text("..."),
               title: Text(movies[index]),
               subtitle: Text("sub"),
-              onTap: () => debugPrint(movies.elementAt(index)),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MovieListViewDetails(),
+                  ),
+                );
+              },
+              // onTap: () => debugPrint(movies.elementAt(index)),
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+//novas rotas
+class MovieListViewDetails extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Movies"),
+        backgroundColor: Colors.blueGrey.shade900,
+      ),
+      body: Center(
+        child: Container(
+          child: RaisedButton(child: Text("Go Back"), onPressed: () {}),
+        ),
       ),
     );
   }
