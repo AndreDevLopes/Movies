@@ -42,7 +42,7 @@ class MoviListVie extends StatelessWidget {
               ),
               trailing: Text("..."),
               title: Text(movieList[index].title),
-              subtitle: Text("${movieList[0].title}"),
+              subtitle: Text("${movieList[index].title}"),
               onTap: () {
                 Navigator.push(
                   context,
