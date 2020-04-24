@@ -27,7 +27,15 @@ class MoviListVie extends StatelessWidget {
       body: ListView.builder(
         itemCount: movieList.length,
         itemBuilder: (BuildContext context, int index) {
-          return movieCard(movieList[index], context);
+          return Stack(
+            children: <Widget>[
+              movieImage(movieList[index].images[0]),
+              Positioned(
+                top: 10.0,
+                child: movieCard(movieList[index], context),
+              ),
+            ],
+          );
           /* return Card(
             elevation: 4.5,
             color: Colors.white,
@@ -69,6 +77,7 @@ class MoviListVie extends StatelessWidget {
   Widget movieCard(Movie movie, BuildContext context) {
     return InkWell(
       child: Container(
+        margin: EdgeInsets.only(left: 60.0),
         width: MediaQuery.of(context).size.width,
         height: 120,
         child: Card(
@@ -98,7 +107,31 @@ class MoviListVie extends StatelessWidget {
           ),
         ),
       ),
-      onTap: () => debugPrint(movie.title),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MovieListViewDetails(
+              movieName: movie.title,
+              movie: movie,
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget movieImage(String imageUrl) {
+    return Container(
+      width: 100,
+      height: 100,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        image: DecorationImage(
+            image: NetworkImage(imageUrl ??
+                'https://images-na.ssl-images-amazon.com/images/M/MV5BZjZkN2M5ODgtMjQ2OC00ZjAxLWE1MjMtZDE0OTNmNGM0NWEwXkEyXkFqcGdeQXVyNjUxNzgwNTE@._V1_SX1777_CR0,0,1777,999_AL_.jpg'),
+            fit: BoxFit.cover),
+      ),
     );
   }
 }
