@@ -45,7 +45,9 @@ class MoviListVie extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => MovieListViewDetails(),
+                    builder: (context) => MovieListViewDetails(
+                      movieName: movies.elementAt(index),
+                    ),
                   ),
                 );
               },
@@ -60,17 +62,21 @@ class MoviListVie extends StatelessWidget {
 
 //novas rotas
 class MovieListViewDetails extends StatelessWidget {
+  final String movieName;
+
+  const MovieListViewDetails({Key key, this.movieName}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Movies"),
+        title: Text("Movies "),
         backgroundColor: Colors.blueGrey.shade900,
       ),
       body: Center(
         child: Container(
           child: RaisedButton(
-              child: Text("Go Back"),
+              child: Text("Go Back ${this.movieName}"),
               onPressed: () {
                 Navigator.pop(context);
               }),
