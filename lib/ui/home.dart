@@ -23,15 +23,15 @@ class MoviListVie extends StatelessWidget {
         title: Text("Movies"),
         backgroundColor: Colors.blueGrey.shade900,
       ),
-      backgroundColor: Colors.blueGrey.shade400,
+      backgroundColor: Colors.blueGrey.shade900,
       body: ListView.builder(
         itemCount: movieList.length,
         itemBuilder: (BuildContext context, int index) {
           return Stack(
             children: <Widget>[
-              movieImage(movieList[index].images[0]),
+              Positioned(child: movieImage(movieList[index].images[0])),
               Positioned(
-                top: 10.0,
+                top: 2.0,
                 child: movieCard(movieList[index], context),
               ),
             ],
@@ -77,7 +77,7 @@ class MoviListVie extends StatelessWidget {
   Widget movieCard(Movie movie, BuildContext context) {
     return InkWell(
       child: Container(
-        margin: EdgeInsets.only(left: 60.0),
+        margin: EdgeInsets.only(left: 70.0),
         width: MediaQuery.of(context).size.width,
         height: 120,
         child: Card(
@@ -154,7 +154,7 @@ class MoviListVie extends StatelessWidget {
 
   Widget movieImage(String imageUrl) {
     return Container(
-      margin: EdgeInsets.only(top: 15.0),
+      margin: EdgeInsets.only(top: 10.0),
       width: 100,
       height: 100,
       decoration: BoxDecoration(
@@ -183,6 +183,10 @@ class MovieListViewDetails extends StatelessWidget {
         title: Text("Movies "),
         backgroundColor: Colors.blueGrey.shade900,
       ),
+      body: ListView(
+        children: <Widget>[MovieDetailsThumbnail(thumbnail: movie.images[0])],
+      ),
+      /*
       body: Center(
         child: Container(
           child: RaisedButton(
@@ -191,7 +195,34 @@ class MovieListViewDetails extends StatelessWidget {
                 Navigator.pop(context);
               }),
         ),
-      ),
+      ),*/
+    );
+  }
+}
+
+class MovieDetailsThumbnail extends StatelessWidget {
+  final String thumbnail;
+  const MovieDetailsThumbnail({Key key, this.thumbnail}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.bottomCenter,
+      children: <Widget>[
+        Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 190,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(thumbnail), fit: BoxFit.cover)),
+            ),
+            Icon(Icons.play_circle_outline, size: 100, color: Colors.white)
+          ],
+        ),
+      ],
     );
   }
 }
