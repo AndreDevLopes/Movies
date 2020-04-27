@@ -83,26 +83,50 @@ class MoviListVie extends StatelessWidget {
         child: Card(
           color: Colors.black45,
           child: Padding(
-            padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 54.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(movie.title),
-                    Text("Rating: ${movie.imdbRating} /10"),
-                  ],
-                ),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+            padding: const EdgeInsets.only(top: 5.0, bottom: 8.0, left: 30.0),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text("Released: ${movie.released}"),
-                      Text(movie.runtime),
-                      Text(movie.rated),
-                    ])
-              ],
+                      Flexible(
+                        child: Text(
+                          movie.title,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17.0,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        "Rating: ${movie.imdbRating} /10",
+                        style: mainTextStyle(),
+                      ),
+                    ],
+                  ),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Text(
+                          "Released: ${movie.released}",
+                          style: mainTextStyle(),
+                        ),
+                        Text(
+                          movie.runtime,
+                          style: mainTextStyle(),
+                        ),
+                        Text(
+                          movie.rated,
+                          style: mainTextStyle(),
+                        ),
+                      ])
+                ],
+              ),
             ),
           ),
         ),
@@ -121,8 +145,16 @@ class MoviListVie extends StatelessWidget {
     );
   }
 
+  TextStyle mainTextStyle() {
+    return TextStyle(
+      fontSize: 15.0,
+      color: Colors.grey,
+    );
+  }
+
   Widget movieImage(String imageUrl) {
     return Container(
+      margin: EdgeInsets.only(top: 15.0),
       width: 100,
       height: 100,
       decoration: BoxDecoration(
